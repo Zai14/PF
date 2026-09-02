@@ -100,6 +100,7 @@ const CACHE_BUST = `?v=${Date.now()}`;
 type ProjectItem = {
   href: string;
   title: string;
+  description: string;
   tech: string;
   year: string;
 };
@@ -126,24 +127,28 @@ const PROJECT_ITEMS: ProjectItem[] = [
   {
     href: "#",
     title: "Applekul One / GongulOS: AI Farm Management Platform",
+    description: "Full-stack farm management platform integrating Planet.com & SentinelHub satellite imagery with TensorFlow ML models for crop disease detection, yield prediction, and precision agriculture workflows.",
     tech: "TypeScript React TensorFlow Supabase AWS | Private Company",
     year: "2025-Present",
   },
   {
     href: "https://github.com/Zai14/Node-Link",
     title: "NodeLink / Kraken: Decentralized E2E Encrypted Messenger",
+    description: "Privacy-focused messaging platform with AES-GCM encryption, ECDH key exchange, ECDSA authentication, MetaMask Web3 login, and decentralized storage serving 100+ concurrent users.",
     tech: "JavaScript AES-GCM ECDH MetaMask Supabase GUN.js",
     year: "2024-2025",
   },
   {
     href: "https://github.com/Zai14/AI-Powered-Medical-Diagnosis-System",
     title: "AI Medical Diagnosis System",
+    description: "ML pipeline achieving 87% accuracy for disease prediction on healthcare datasets, with a Streamlit dashboard for real-time medical data analysis and interactive visualizations.",
     tech: "Python Scikit-learn Streamlit",
     year: "2024-2025",
   },
   {
     href: "https://github.com/Zai14/MagiskOnWSAScript",
     title: "Magisk on WSA: Android Root Solution",
+    description: "Ported Magisk root to Windows Subsystem for Android, enabling full app customization and sideloading APKs across all apps without Amazon Appstore restrictions.",
     tech: "Android WSA Magisk",
     year: "2021",
   },
@@ -223,6 +228,7 @@ function ProjectCard({
   href,
   title,
   titleDataValue,
+  description,
   tech,
   techDataValue,
   year,
@@ -232,6 +238,7 @@ function ProjectCard({
   href: string;
   title: string;
   titleDataValue: string;
+  description: string;
   tech: string;
   techDataValue: string;
   year: string;
@@ -261,6 +268,7 @@ function ProjectCard({
         <div className="Separator rp-project-sep" />
         <p data-value={year}>{year}</p>
       </div>
+      <p className="rp-project-desc">{description}</p>
       <p className="rp-project-tech" data-value={techDataValue}>
         {tech}
       </p>
@@ -352,6 +360,7 @@ export default function PortfolioShell() {
                 href={project.href}
                 title={project.title}
                 titleDataValue={project.title}
+                description={project.description}
                 tech={project.tech}
                 techDataValue={project.tech}
                 year={project.year}
