@@ -1,0 +1,25 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.history/
+
+# Temporary files
+*.log
+*.tmp
+*.cache
+*.swp
+*.swo
+
+# Dependencies & build
+node_modules/
+.next/
+out/
+dist/
+
+# Env
+.env
+.env.*
+.temp/
