@@ -71,6 +71,22 @@ function IconLinkedIn() {
   );
 }
 
+function IconInstagram() {
+  return (
+    <svg fill="currentColor" viewBox="0 0 24 24" className="lp-social-svg" aria-hidden>
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+    </svg>
+  );
+}
+
+function IconLinktree() {
+  return (
+    <svg fill="currentColor" viewBox="0 0 24 24" className="lp-social-svg" aria-hidden>
+      <path d="M12.001 0a2.138 2.138 0 0 0-2.006 1.471L5.764 14.093l-3.53-2.887a1.538 1.538 0 0 0-1.97.162 1.56 1.56 0 0 0-.161 1.983l4.66 5.886c.303.383.774.6 1.274.6h.032c.498 0 .965-.212 1.29-.587l7.084-9.282c.39-.51.283-1.233-.238-1.63a1.356 1.356 0 0 0-1.649-.24L8.113 15.04l2.647-8.704c.066-.218-.062-.444-.291-.514a.418.418 0 0 0-.511.284L7.15 22.115a1.27 1.27 0 0 0 .138.954c.285.422.788.67 1.32.67h.044c.474 0 .917-.195 1.232-.541l7.355-9.384 3.37 4.513a1.537 1.537 0 0 0 1.252.643c.478 0 .933-.232 1.215-.637a1.558 1.558 0 0 0 .174-1.281l-4.058-10.16A2.14 2.14 0 0 0 14.014 0h-4.013z" />
+    </svg>
+  );
+}
+
 function IconCv() {
   return (
     <svg
@@ -179,8 +195,8 @@ export default function LeftPanelHero() {
             .
           </h2>
           <p className="lp-bio">
-            B.Tech CS graduate building AI/ML applications, satellite imagery
-            pipelines, and cloud-backed full-stack systems.
+            B.Tech CS graduate building AI/ML applications, Satellite imagery
+            Pipelines, and Cloud-Backed Full-Stack Systems.
           </p>
         </div>
 
@@ -202,6 +218,24 @@ export default function LeftPanelHero() {
             aria-label="LinkedIn"
           >
             <IconLinkedIn />
+          </a>
+          <a
+            className="lp-social-btn"
+            href="https://www.instagram.com/za.i.14"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <IconInstagram />
+          </a>
+          <a
+            className="lp-social-btn"
+            href="https://linktr.ee/Za.I.14"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Linktree"
+          >
+            <IconLinktree />
           </a>
           <a
             className="lp-social-btn"
