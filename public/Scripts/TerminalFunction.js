@@ -349,27 +349,32 @@ function BootSequence() {
   OutputsText = "";
   let LoadingChars = ["—", "\\", "|", "/"];
   // The font used below is ANSI shodow if you forget @Meeelaaad
-  if (Time > 0.1) {
-    OutputsText += "██╗  ██╗ █████╗ ███████╗██╗  ██╗ █████╗ ██████╗ \n";
-  }
-  if (Time > 0.2) {
-    OutputsText += "██║  ██║██╔══██╗██╔════╝██║  ██║██╔══██╗██╔══██╗\n";
-  }
-  if (Time > 0.3) {
-    OutputsText += "███████║███████║███████╗███████║███████║██║  ██║\n";
-  }
-  if (Time > 0.4) {
-    OutputsText += "██╔══██║██╔══██║╚════██║██╔══██║██╔══██║██║  ██║\n";
-  }
-  if (Time > 0.5) {
-    OutputsText += "██║  ██║██║  ██║███████║██║  ██║██║  ██║██████╔╝\n";
-  }
-  if (Time > 0.6) {
-    OutputsText +=
-      "╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ \n\n\n";
-  }
-  if (Time > 1.1) {
-    OutputsText += "Welcome to Zaid.AI 1.2.7 x86_64\n";
+ if (Time > 0.1) {
+  OutputsText += "███████╗ ██████╗ ██████╗ ██████╗ ███████╗\n";
+}
+
+if (Time > 0.2) {
+  OutputsText += "╚══███╔╝██╔════╝██╔═══██╗██╔══██╗██╔════╝\n";
+}
+
+if (Time > 0.3) {
+  OutputsText += "  ███╔╝ ██║     ██║   ██║██████╔╝█████╗  \n";
+}
+
+if (Time > 0.4) {
+  OutputsText += " ███╔╝  ██║     ██║   ██║██╔══██╗██╔══╝  \n";
+}
+
+if (Time > 0.5) {
+  OutputsText += "███████╗╚██████╗╚██████╔╝██║  ██║███████╗\n";
+}
+
+if (Time > 0.6) {
+  OutputsText += "╚══════╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝\n\n\n";
+}
+
+if (Time > 1.1) {
+  OutputsText += "Welcome to Zaid.AI 1.2.7 x86_64\n";
   }
   if (Time > 1.2) {
     OutputsText += "Type 'help' to list available commands\n\n\n";
@@ -456,7 +461,7 @@ const FileSystem = {
       },          "experience.txt": {
         type: "file",
         content:
-          "AI/ML Software Developer | Applekul | Jan 2026 - Present\n- Built TypeScript/React farm management platform\n  integrating Planet.com & SentinelHub satellite\n  imagery for crop disease detection.\n- Integrated weather station sensors with AWS IoT\n  services for real-time environmental data.\n- Designed REST API-backed backend services using\n  Supabase, edge functions, and AWS components.\n\nAI Semantic Analysis Engineer Intern | RIT | Mar 2025 - May 2025\n- Built PyTorch-based sentiment analysis pipeline,\n  improving NLP dataset interpretability by 25%.\n- Developed React-based AI frontend modules supporting\n  500+ user interactions with real-time visualizations.",
+          "AI/ML Software Developer | Applekul | Jan 2026 - Present\n- Built TypeScript/React farm management platform\n  integrating Planet.com & SentinelHub satellite\n  imagery for crop disease detection.\n- Integrated weather station sensors with AWS IoT\n  services for real-time environmental data.\n- Designed REST API-backed backend services using\n  Supabase, edge functions, and AWS components.\n\nAI Vibe Analysis Engineer Intern | RIT | Mar 2025 - May 2025\n- Built PyTorch-based sentiment analysis pipeline,\n  improving NLP dataset interpretability by 25%.\n- Developed React-based AI frontend modules supporting\n  500+ user interactions with real-time visualizations.",
       },
       "education.txt": {
         type: "file",
@@ -465,7 +470,7 @@ const FileSystem = {
       },          "accolades.txt": {
         type: "file",
         content:
-          "AI/ML Software Developer | Applekul | 2026\n- Architected full-stack farm management system\n  integrating satellite imagery analysis,\n  weather-based disease detection, and advisory\n  recommendations. Built REST APIs and cloud-backed\n  backend workflows using Supabase, AWS, S3, Lambda.\n\nAI Semantic Analysis Engineer Intern | RIT | 2025\n- Built PyTorch-based sentiment analysis pipeline,\n  improving NLP dataset interpretability by 25%.\n\nApplekul One / GongulOS | 2025-Present\n- Full-stack farm management platform with\n  Planet.com/SentinelHub APIs and TensorFlow ML.\n  (Private Company Project - Repo not public)\n\nNodeLink / Kraken | 2024-2025\n- Decentralized E2E encrypted messenger with\n  AES-GCM, ECDH, and MetaMask Web3 integration.\n\nAI Medical Diagnosis System | 2024-2025\n- ML models achieving 87% accuracy for disease\n  prediction with Streamlit dashboard.\n\nMagisk on WSA | 2021\n- Ported Magisk root to Windows Subsystem for\n  Android, enabling full app customization.",
+          "AI/ML Software Developer | Applekul | 2026\n- Architected full-stack farm management system\n  integrating satellite imagery analysis,\n  weather-based disease detection, and advisory\n  recommendations. Built REST APIs and cloud-backed\n  backend workflows using Supabase, AWS, S3, Lambda.\n\nAI Vibe Analysis Engineer Intern | RIT | 2025\n- Built PyTorch-based sentiment analysis pipeline,\n  improving NLP dataset interpretability by 25%.\n\nApplekul One / GongulOS | 2025-Present\n- Full-stack farm management platform with\n  Planet.com/SentinelHub APIs and TensorFlow ML.\n  (Private Company Project - Repo not public)\n\nNodeLink / Kraken | 2024-2025\n- Decentralized E2E encrypted messenger with\n  AES-GCM, ECDH, and MetaMask Web3 integration.\n\nAI Medical Diagnosis System | 2024-2025\n- ML models achieving 87% accuracy for disease\n  prediction with Streamlit dashboard.\n\nMagisk on WSA | 2021\n- Ported Magisk root to Windows Subsystem for\n  Android, enabling full app customization.",
       },
       "plasma.exe": { type: "executable", content: "plasma" },
       games: {

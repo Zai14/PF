@@ -101,6 +101,7 @@ type ProjectItem = {
   href: string;
   title: string;
   tech: string;
+  year: string;
 };
 
 type ExperienceItem = {
@@ -126,21 +127,25 @@ const PROJECT_ITEMS: ProjectItem[] = [
     href: "#",
     title: "Applekul One / GongulOS: AI Farm Management Platform",
     tech: "TypeScript React TensorFlow Supabase AWS | Private Company",
+    year: "2025-Present",
   },
   {
     href: "https://github.com/Zai14/Node-Link",
     title: "NodeLink / Kraken: Decentralized E2E Encrypted Messenger",
     tech: "JavaScript AES-GCM ECDH MetaMask Supabase GUN.js",
+    year: "2024-2025",
   },
   {
     href: "https://github.com/Zai14/AI-Powered-Medical-Diagnosis-System",
     title: "AI Medical Diagnosis System",
     tech: "Python Scikit-learn Streamlit",
+    year: "2024-2025",
   },
   {
     href: "https://github.com/Zai14/MagiskOnWSAScript",
     title: "Magisk on WSA: Android Root Solution",
     tech: "Android WSA Magisk",
+    year: "2021",
   },
 ] as const;
 
@@ -150,7 +155,7 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
     text: "Built a TypeScript/React farm management platform integrating Planet.com & SentinelHub satellite imagery for crop disease detection and precision agriculture workflows.",
   },
   {
-    headline: "AI Semantic Analysis Engineer Intern | Rochester Institute of Technology | Mar 2025 - May 2025",
+    headline: "AI Vibe Analysis Engineer Intern | Rochester Institute of Technology | Mar 2025 - May 2025",
     text: "Built and evaluated a PyTorch-based sentiment analysis pipeline, improving NLP dataset interpretability by 25%. Developed React-based AI frontend modules supporting 500+ user interactions.",
   },
 ] as const;
@@ -177,7 +182,7 @@ const ACCOLADE_ITEMS: AccoladeItem[] = [
   },
   {
     id: "riit-ai-intern",
-    title: "AI Semantic Analysis Engineer Intern | RIT | 2025",
+    title: "AI Vibe Analysis Engineer Intern | RIT | 2025",
     body: "Built and evaluated a PyTorch-based sentiment analysis pipeline, improving NLP dataset interpretability by 25%. Developed React-based AI frontend modules supporting 500+ user interactions with real-time visualizations.",
   },
   {
@@ -220,6 +225,7 @@ function ProjectCard({
   titleDataValue,
   tech,
   techDataValue,
+  year,
   className,
   style,
 }: {
@@ -228,6 +234,7 @@ function ProjectCard({
   titleDataValue: string;
   tech: string;
   techDataValue: string;
+  year: string;
   className?: string;
   style?: React.CSSProperties;
 }) {
@@ -252,7 +259,7 @@ function ProjectCard({
           {title}
         </p>
         <div className="Separator rp-project-sep" />
-        <p data-value="2025">2025</p>
+        <p data-value={year}>{year}</p>
       </div>
       <p className="rp-project-tech" data-value={techDataValue}>
         {tech}
@@ -347,6 +354,7 @@ export default function PortfolioShell() {
                 titleDataValue={project.title}
                 tech={project.tech}
                 techDataValue={project.tech}
+                year={project.year}
                 className="rp-animate"
                 style={{ animationDelay: `${i * 40}ms` }}
               />
