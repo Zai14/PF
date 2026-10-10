@@ -780,6 +780,154 @@ function ExecuteCommand() {
       }
       break;
 
+    case "about":
+      if (Arguments.length) {
+        OutputsText += "\nError: 'about' doesn't accept any arguments\n\n";
+      } else {
+        OutputsText +=
+          "\nZaid Shabir (@Zai14) - AI/ML Software Developer\n" +
+          "B.Tech CSE, University of Kashmir (Nov 2025)\n\n" +
+          "I build AI/ML apps, satellite imagery pipelines,\n" +
+          "and cloud-backed full-stack systems.\n\n" +
+          "Currently: AI/ML Software Developer at Applekul.\n" +
+          "Status: Available for work.\n\n" +
+          "Try: projects | experience | socials | resume\n\n";
+      }
+      break;
+
+    case "projects":
+      if (Arguments.length) {
+        OutputsText += "\nError: 'projects' doesn't accept any arguments\n\n";
+      } else {
+        OutputsText +=
+          "\nProjects - use 'cd projects' to browse them:\n\n" +
+          "01_applekul_farm.lnk      Applekul / GongulOS\n" +
+          "                          TypeScript, TensorFlow\n" +
+          "02_nodelink_messenger.lnk NodeLink / Kraken\n" +
+          "                          AES-GCM, ECDH, GUN.js\n" +
+          "03_ai_medical.lnk         AI Medical Diagnosis\n" +
+          "                          Scikit-learn, Streamlit\n" +
+          "04_magisk_wsa.lnk         Magisk on WSA\n" +
+          "                          Android, Magisk\n\n" +
+          "Tip: start <file.lnk> from inside 'projects'.\n\n";
+      }
+      break;
+
+    case "experience":
+      if (Arguments.length) {
+        OutputsText += "\nError: 'experience' doesn't accept any arguments\n\n";
+      } else {
+        OutputsText +=
+          "\nAI/ML Software Developer | Applekul\n" +
+          "  Jan 2026 - Present\n" +
+          "- Built TypeScript/React farm management platform\n" +
+          "  integrating Planet.com & SentinelHub satellite\n" +
+          "  imagery for crop disease detection.\n" +
+          "- Integrated weather station sensors with AWS IoT\n" +
+          "  services for real-time environmental data.\n" +
+          "- Designed REST API-backed backend services using\n" +
+          "  Supabase, edge functions, and AWS components.\n\n" +
+          "AI Vibe Analysis Engineer Intern | RIT\n" +
+          "  Mar 2025 - May 2025\n" +
+          "- Built PyTorch-based sentiment analysis pipeline,\n" +
+          "  improving NLP dataset interpretability by 25%.\n" +
+          "- Developed React-based AI frontend modules\n" +
+          "  supporting 500+ user interactions with\n" +
+          "  real-time visualizations.\n\n";
+      }
+      break;
+
+    case "resume":
+      if (Arguments.length) {
+        OutputsText += "\nError: 'resume' doesn't accept any arguments\n\n";
+      } else {
+        OutputsText += "\nOpening resume in a new tab...\n\n";
+        window.open("/Images/Zaid-Shabir-Resume.pdf", "_blank");
+      }
+      break;
+
+    case "hire":
+      if (Arguments.length) {
+        OutputsText += "\nError: 'hire' doesn't accept any arguments\n\n";
+      } else {
+        OutputsText +=
+          "\nAvailable for work - full-time or contract.\n\n" +
+          "Email     ZaidShabir67@gmail.com\n" +
+          "GitHub    github.com/Zai14\n" +
+          "LinkedIn  linkedin.com/in/zai14\n" +
+          "Linktree  linktr.ee/Za.I.14\n\n" +
+          "Run 'socials' for every link, 'resume' for CV.\n\n";
+      }
+      break;
+
+    case "socials": {
+      const SocialLinks = {
+        github: "https://github.com/Zai14",
+        linkedin: "https://www.linkedin.com/in/zai14/",
+        instagram: "https://www.instagram.com/za.i.14",
+        linktree: "https://linktr.ee/Za.I.14",
+        email: "mailto:ZaidShabir67@gmail.com",
+      };
+      const LinkName = Arguments.length ? Arguments[0].toLowerCase() : "";
+      if (!Arguments.length) {
+        OutputsText +=
+          "\nGitHub    https://github.com/Zai14\n" +
+          "LinkedIn  https://www.linkedin.com/in/zai14/\n" +
+          "Instagram https://www.instagram.com/za.i.14\n" +
+          "Linktree  https://linktr.ee/Za.I.14\n" +
+          "Email     ZaidShabir67@gmail.com\n\n" +
+          "Open one: socials <name>  e.g. socials github\n\n";
+      } else if (Arguments.length > 1) {
+        OutputsText += "\nError: 'socials' accepts one link name\n\n";
+      } else if (Object.prototype.hasOwnProperty.call(SocialLinks, LinkName)) {
+        OutputsText += `\nOpening ${LinkName}...\n\n`;
+        window.open(SocialLinks[LinkName], "_blank");
+      } else {
+        OutputsText +=
+          `\nUnknown link '${LinkName}'.\n` +
+          "Available: github, linkedin,\n" +
+          "  instagram, linktree, email\n\n";
+      }
+      break;
+    }
+
+    case "theme": {
+      const Arg = Arguments.length ? Arguments[0].toLowerCase() : "";
+      if (Arg && Arg !== "light" && Arg !== "dark") {
+        OutputsText += "\nUsage: theme [light|dark]\n\n";
+        break;
+      }
+      const IsLight = document.documentElement.classList.contains(
+        "embed-site-light",
+      );
+      const Current = IsLight ? "light" : "dark";
+      const Next = Arg || (IsLight ? "dark" : "light");
+      try {
+        localStorage.setItem("zaid-embed-theme", Next);
+      } catch {
+        // Storage can be blocked; the class toggle below still applies.
+      }
+      document.documentElement.classList.toggle(
+        "embed-site-light",
+        Next === "light",
+      );
+      try {
+        // SiteThemeProvider listens for 'storage' to refresh the hero toggle.
+        window.dispatchEvent(
+          new StorageEvent("storage", {
+            key: "zaid-embed-theme",
+            newValue: Next,
+            oldValue: Current,
+            storageArea: localStorage,
+          }),
+        );
+      } catch {
+        // Ignore: the theme is already applied visually.
+      }
+      OutputsText += `\nTheme set to ${Next}.\n\n`;
+      break;
+    }
+
     case "clear":
       if (Arguments.length) {
         OutputsText += "\nError: 'clear' doesn't accept any arguments\n\n";
@@ -793,7 +941,7 @@ function ExecuteCommand() {
         OutputsText += "\nError: 'help' doesn't accept any arguments\n\n";
       } else {
         OutputsText +=
-          "\nPress 'tab' for auto complete and 'esc' to exit\na program (.exe file)\n\nLS           Lists current directory contents\nCD           Change directory, '..' back, '/' root\nSTART        Opens specified file or link\nSNAKE        Classic Snake game\nTETRIS       Falling blocks game\nMINESWEEPER  Find the mines\nPONG         Ball & paddle game\n2048         Slide & merge tiles\nMAZE         Navigate the dungeon\nTYPETEST     Typing speed test\nCLEAR        Clears all previous terminal outputs\n\n";
+          "\nPress 'tab' for auto complete and 'esc' to exit\na program (.exe file)\n\nLS           Lists current directory contents\nCD           Change directory, '..' back, '/' root\nSTART        Opens specified file or link\nABOUT        Who I am and what I build\nPROJECTS     Browse my project files\nEXPERIENCE   Work history\nRESUME       Open my CV in a new tab\nHIRE         Availability and contact\nSOCIALS      GitHub, LinkedIn and more\nTHEME        Toggle light/dark site theme\nSNAKE        Classic Snake game\nTETRIS       Falling blocks game\nMINESWEEPER  Find the mines\nPONG         Ball & paddle game\n2048         Slide & merge tiles\nMAZE         Navigate the dungeon\nTYPETEST     Typing speed test\nCLEAR        Clears all previous terminal outputs\n\n";
       }
       break;
 
@@ -812,6 +960,13 @@ function AutoComplete() {
     "ls",
     "cd",
     "start",
+    "about",
+    "projects",
+    "experience",
+    "resume",
+    "hire",
+    "socials",
+    "theme",
     "snake",
     "tetris",
     "minesweeper",

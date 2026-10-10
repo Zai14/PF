@@ -249,7 +249,7 @@ export default function LeftPanelHero() {
         <div className="lp-bottom-row">
           <a
             className="lp-cv"
-            href="/Images/AI_ML_Micro1Improvements%20(1).pdf"
+            href="/Images/Zaid-Shabir-Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
           >
