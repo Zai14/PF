@@ -634,6 +634,73 @@ function StartFile(InputFile) {
   }
 }
 
+/** Certifications, mirrored from the Certifications section (Section4). */
+const CertGroups = [
+  ["AI & Machine Learning", [
+    ["IBM", "Combining Machine Learning and Rules for Cybersecurity", "https://courses.cognitiveclass.ai/certificates/c048a3c260924dab9f34042be72c78b5"],
+    ["IBM", "Machine Learning with Python", "https://courses.cognitiveclass.ai/certificates/2efa2d4e7923404e9e26bc93b5c55e46"],
+    ["IBM", "Build Your Own Chatbot", "https://courses.cognitiveclass.ai/certificates/e0a366c49ce4451a82bd6850c968ed7f"],
+  ]],
+  ["Software Engineering", [
+    ["Accenture Nordics", "Developer Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20Nordics/PxenP4rHNE6Bh4nQz_Accenture%20Nordics_E4LaihxeGMxhwYpoA_1707042606666_completion_certificate.pdf"],
+    ["Walmart USA", "Advanced Software Engineering Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Walmart%20USA/oX6f9BbCL9kJDJzfg_Walmart%20USA_E4LaihxeGMxhwYpoA_1705946001725_completion_certificate.pdf"],
+    ["Goldman Sachs", "Software Engineering Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Goldman%20Sachs/NPdeQ43o8P9HJmJzg_Goldman%20Sachs_E4LaihxeGMxhwYpoA_1705945988421_completion_certificate.pdf"],
+    ["J.P. Morgan", "Software Engineering Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/J.P.%20Morgan/R5iK7HMxJGBgaSbvk_J.P.%20Morgan_E4LaihxeGMxhwYpoA_1705945992257_completion_certificate.pdf"],
+  ]],
+  ["Cybersecurity", [
+    ["Mastercard", "Cybersecurity Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mastercard/vcKAB5yYAgvemepGQ_Mastercard_E4LaihxeGMxhwYpoA_1705946005791_completion_certificate.pdf"],
+    ["Tata Consultancy Services", "Cybersecurity Analyst Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Tata/gmf3ypEXBj2wvfQWC_Tata%20Consultancy%20Services%20_E4LaihxeGMxhwYpoA_1705945995195_completion_certificate.pdf"],
+  ]],
+  ["Data Analytics & Visualization", [
+    ["Accenture North America", "Data Analytics and Visualization Job Simulation", "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/hzmoNKtzvAzXsEqx8_Accenture%20North%20America_E4LaihxeGMxhwYpoA_1705945997963_completion_certificate.pdf"],
+  ]],
+];
+
+const CertUrls = [];
+for (const CertGroup of CertGroups) {
+  for (const Cert of CertGroup[1]) {
+    CertUrls.push(Cert[2]);
+  }
+}
+
+/** Word-wrap `Title` after a fixed prefix; continuation lines hang-indent by 6. */
+function WrapCertificateLine(Prefix, Title, Max) {
+  const Words = Title.split(" ");
+  const Lines = [];
+  let Line = Prefix;
+  let First = true;
+  for (const Word of Words) {
+    const Separator = First ? "" : " ";
+    if (Line.length + Separator.length + Word.length > Max && Line !== Prefix) {
+      Lines.push(Line);
+      Line = "      " + Word;
+    } else {
+      Line = Line + Separator + Word;
+    }
+    First = false;
+  }
+  Lines.push(Line);
+  return Lines.join("\n") + "\n";
+}
+
+function ListCertificates() {
+  let Output = "\n" + CertUrls.length + " certificates - 'certs <n>' opens one\n\n";
+  let Index = 0;
+  for (const CertGroup of CertGroups) {
+    Output += "[" + CertGroup[0] + "]\n";
+    for (const Cert of CertGroup[1]) {
+      Index++;
+      Output += WrapCertificateLine(
+        "  " + String(Index).padStart(2) + "  " + Cert[0] + "  ",
+        Cert[1],
+        51,
+      );
+    }
+    Output += "\n";
+  }
+  return Output;
+}
+
 // Modified ExecuteCommand function
 function ExecuteCommand() {
   const [Command, ...Arguments] = InputText.split(" ");
@@ -891,6 +958,37 @@ function ExecuteCommand() {
       break;
     }
 
+    case "certs": {
+      if (Arguments.length > 1) {
+        OutputsText += "\nError: 'certs' accepts one number\n\n";
+      } else if (!Arguments.length) {
+        OutputsText += ListCertificates();
+      } else {
+        const CertNumber = parseInt(Arguments[0], 10);
+        const Valid =
+          Number.isInteger(CertNumber) &&
+          CertNumber >= 1 &&
+          CertNumber <= CertUrls.length &&
+          String(CertNumber) === Arguments[0];
+        if (!Valid) {
+          OutputsText +=
+            "\nUsage: certs            list them\n" +
+            "       certs <1-" +
+            CertUrls.length +
+            ">  open one\n\n";
+        } else {
+          OutputsText +=
+            "\nOpening certificate " +
+            CertNumber +
+            " of " +
+            CertUrls.length +
+            "...\n\n";
+          window.open(CertUrls[CertNumber - 1], "_blank");
+        }
+      }
+      break;
+    }
+
     case "theme": {
       const Arg = Arguments.length ? Arguments[0].toLowerCase() : "";
       if (Arg && Arg !== "light" && Arg !== "dark") {
@@ -941,7 +1039,7 @@ function ExecuteCommand() {
         OutputsText += "\nError: 'help' doesn't accept any arguments\n\n";
       } else {
         OutputsText +=
-          "\nPress 'tab' for auto complete and 'esc' to exit\na program (.exe file)\n\nLS           Lists current directory contents\nCD           Change directory, '..' back, '/' root\nSTART        Opens specified file or link\nABOUT        Who I am and what I build\nPROJECTS     Browse my project files\nEXPERIENCE   Work history\nRESUME       Open my CV in a new tab\nHIRE         Availability and contact\nSOCIALS      GitHub, LinkedIn and more\nTHEME        Toggle light/dark site theme\nSNAKE        Classic Snake game\nTETRIS       Falling blocks game\nMINESWEEPER  Find the mines\nPONG         Ball & paddle game\n2048         Slide & merge tiles\nMAZE         Navigate the dungeon\nTYPETEST     Typing speed test\nCLEAR        Clears all previous terminal outputs\n\n";
+          "\nPress 'tab' for auto complete and 'esc' to exit\na program (.exe file)\n\nLS           Lists current directory contents\nCD           Change directory, '..' back, '/' root\nSTART        Opens specified file or link\nABOUT        Who I am and what I build\nPROJECTS     Browse my project files\nEXPERIENCE   Work history\nRESUME       Open my CV in a new tab\nHIRE         Availability and contact\nSOCIALS      GitHub, LinkedIn and more\nCERTS        Verified certifications\nTHEME        Toggle light/dark site theme\nSNAKE        Classic Snake game\nTETRIS       Falling blocks game\nMINESWEEPER  Find the mines\nPONG         Ball & paddle game\n2048         Slide & merge tiles\nMAZE         Navigate the dungeon\nTYPETEST     Typing speed test\nCLEAR        Clears all previous terminal outputs\n\n";
       }
       break;
 
@@ -966,6 +1064,7 @@ function AutoComplete() {
     "resume",
     "hire",
     "socials",
+    "certs",
     "theme",
     "snake",
     "tetris",

@@ -1,4 +1,4 @@
-/* Projects, Experience, Education, Accolades — scoped to #RightPanel (DM Sans via layout) */
+/* Projects, Experience, Education, Certifications — scoped to #RightPanel (DM Sans via layout) */
 
 /* ═══ Scroll-reveal animation ═══ */
 @keyframes rp-reveal-up {
@@ -353,7 +353,7 @@
   margin-top: 0.35rem !important;
 }
 
-/* ═══ Accolades ═══ */
+/* ═══ Certifications (cards reuse .rp-accolade*) ═══ */
 #RightPanel .rp-accolade-list {
   display: flex;
   flex-direction: column;
@@ -431,6 +431,34 @@
 
 #RightPanel .rp-accolade-body .link:hover {
   border-bottom-color: rgba(255, 255, 255, 0.38);
+}
+
+/* ═══ Accolades/Certifications ═══ */
+#RightPanel .rp-cert-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+#RightPanel .rp-cert-group + .rp-cert-group {
+  margin-top: 0.6rem;
+}
+
+#RightPanel .rp-cert-group-title {
+  margin: 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.4) !important;
+}
+
+/* Cards become links to the hosted certificate. */
+#RightPanel a.rp-accolade.rp-cert {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 /* ═══ Footer credit ═══ */
@@ -603,6 +631,10 @@ html.embed-site-light #RightPanel .rp-accolade-body .link {
 
 html.embed-site-light #RightPanel .rp-accolade-body .link:hover {
   border-bottom-color: rgba(0, 0, 0, 0.28);
+}
+
+html.embed-site-light #RightPanel .rp-cert-group-title {
+  color: #71717a !important;
 }
 
 html.embed-site-light #RightPanel .rp-footer-credit {

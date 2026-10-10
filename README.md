@@ -157,7 +157,7 @@ The project you are reading. See [Architecture](#architecture) below.
 
 ### Two-pane shell
 
-`components/PortfolioShell.tsx` owns `#MainDiv`, a fixed `#LeftPanel` (profile, nav) and a scrollable `#RightPanel` holding five sections: **Tech stack → Projects → Experience → Accolades → Education**. Section nav scrolls the panel on desktop and the window at 1024px and below, and an `IntersectionObserver` adds `.rp-visible` for scroll-reveal animations.
+`components/PortfolioShell.tsx` owns `#MainDiv`, a fixed `#LeftPanel` (profile, nav) and a scrollable `#RightPanel` holding five sections: **Tech stack → Projects → Experience → Certifications → Education**. Section nav scrolls the panel on desktop and the window at 1024px and below, and an `IntersectionObserver` adds `.rp-visible` for scroll-reveal animations.
 
 The shell also lazily injects the four legacy scene scripts (`ModelFiles.js`, `RenderingFunctions.js`, `TerminalFunction.js`, `Main.js`) with a cache-busting query, keeping the React tree free of canvas globals.
 
@@ -180,6 +180,7 @@ The shell also lazily injects the four legacy scene scripts (`ModelFiles.js`, `R
 | `resume` | Open the CV in a new tab |
 | `hire` | Availability and contact details |
 | `socials [name]` | List links, or open one — e.g. `socials github` |
+| `certs` | List all 10 certifications by category — `certs <n>` opens one |
 | `theme` | Toggle the site theme — pass `light` or `dark` to force it. Syncs with the hero toggle. |
 | `clear` | Reset to the boot sequence |
 | `help` | List every command |

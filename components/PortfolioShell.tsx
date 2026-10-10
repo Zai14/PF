@@ -3,7 +3,6 @@
 /** Full-page shell: #MainDiv, #RightPanel (sections + legacy Main.js hooks), #LeftPanel, script loader. */
 import "../styles/right-panel-sections.css";
 import {
-  type ReactNode,
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -26,7 +25,7 @@ const SECTION_LABELS: Record<(typeof SECTION_IDS)[number], string> = {
   Section1: "Tech stack",
   Section2: "Projects",
   Section3: "Experience",
-  Section4: "Accolades",
+  Section4: "Accolades/Certifications",
   Section5: "Education",
 };
 
@@ -117,10 +116,17 @@ type EducationItem = {
   details: string[];
 };
 
-type AccoladeItem = {
+type CertItem = {
   id: string;
-  title: ReactNode;
-  body: ReactNode;
+  issuer: string;
+  title: string;
+  date: string;
+  href: string;
+};
+
+type CertGroup = {
+  category: string;
+  items: CertItem[];
 };
 
 const PROJECT_ITEMS: ProjectItem[] = [
@@ -179,38 +185,98 @@ const EDUCATION_ITEMS: EducationItem[] = [
   },
 ] as const;
 
-const ACCOLADE_ITEMS: AccoladeItem[] = [
+const CERT_GROUPS: CertGroup[] = [
   {
-    id: "applekul-fullstack-ml",
-    title: "AI/ML Software Developer | Applekul | 2026",
-    body: "Architected a full-stack farm management system integrating satellite imagery analysis, weather-based disease detection, financial tracking, and advisory recommendations. Built REST APIs and cloud-backed backend workflows using Supabase, AWS, S3, Lambda, and edge functions.",
+    category: "AI & Machine Learning",
+    items: [
+      {
+        id: "ibm-ml-rules-cyber",
+        issuer: "IBM",
+        title: "Combining Machine Learning and Rules for Cybersecurity",
+        date: "Jan 2024",
+        href: "https://courses.cognitiveclass.ai/certificates/c048a3c260924dab9f34042be72c78b5",
+      },
+      {
+        id: "ibm-ml-python",
+        issuer: "IBM",
+        title: "Machine Learning with Python",
+        date: "Jan 2024",
+        href: "https://courses.cognitiveclass.ai/certificates/2efa2d4e7923404e9e26bc93b5c55e46",
+      },
+      {
+        id: "ibm-chatbot",
+        issuer: "IBM",
+        title: "Build Your Own Chatbot",
+        date: "Jan 2024",
+        href: "https://courses.cognitiveclass.ai/certificates/e0a366c49ce4451a82bd6850c968ed7f",
+      },
+    ],
   },
   {
-    id: "riit-ai-intern",
-    title: "AI Vibe Analysis Engineer Intern | RIT | 2025",
-    body: "Built and evaluated a PyTorch-based sentiment analysis pipeline, improving NLP dataset interpretability by 25%. Developed React-based AI frontend modules supporting 500+ user interactions with real-time visualizations.",
+    category: "Software Engineering",
+    items: [
+      {
+        id: "forage-accenture-nordics-dev",
+        issuer: "Accenture Nordics",
+        title: "Developer Job Simulation",
+        date: "Feb 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20Nordics/PxenP4rHNE6Bh4nQz_Accenture%20Nordics_E4LaihxeGMxhwYpoA_1707042606666_completion_certificate.pdf",
+      },
+      {
+        id: "forage-walmart-swe",
+        issuer: "Walmart USA",
+        title: "Advanced Software Engineering Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Walmart%20USA/oX6f9BbCL9kJDJzfg_Walmart%20USA_E4LaihxeGMxhwYpoA_1705946001725_completion_certificate.pdf",
+      },
+      {
+        id: "forage-goldman-swe",
+        issuer: "Goldman Sachs",
+        title: "Software Engineering Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Goldman%20Sachs/NPdeQ43o8P9HJmJzg_Goldman%20Sachs_E4LaihxeGMxhwYpoA_1705945988421_completion_certificate.pdf",
+      },
+      {
+        id: "forage-jpmorgan-swe",
+        issuer: "J.P. Morgan",
+        title: "Software Engineering Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/J.P.%20Morgan/R5iK7HMxJGBgaSbvk_J.P.%20Morgan_E4LaihxeGMxhwYpoA_1705945992257_completion_certificate.pdf",
+      },
+    ],
   },
   {
-    id: "applekul-platform",
-    title: "Applekul One / GongulOS: AI Farm Management Platform | 2025-Present",
-    body: "Architected a full-stack farm management system integrating Planet.com/SentinelHub APIs with TensorFlow ML models for real-time crop health monitoring, yield prediction, and field-level analytics.",
+    category: "Cybersecurity",
+    items: [
+      {
+        id: "forage-mastercard-cyber",
+        issuer: "Mastercard",
+        title: "Cybersecurity Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mastercard/vcKAB5yYAgvemepGQ_Mastercard_E4LaihxeGMxhwYpoA_1705946005791_completion_certificate.pdf",
+      },
+      {
+        id: "forage-tcs-cyber",
+        issuer: "Tata Consultancy Services",
+        title: "Cybersecurity Analyst Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Tata/gmf3ypEXBj2wvfQWC_Tata%20Consultancy%20Services%20_E4LaihxeGMxhwYpoA_1705945995195_completion_certificate.pdf",
+      },
+    ],
   },
   {
-    id: "nodelink-messenger",
-    title: "NodeLink / Kraken: Decentralized E2E Encrypted Messenger | 2024-2025",
-    body: "Built privacy-focused messaging platform with AES-GCM encryption, ECDH key exchange, and ECDSA authentication. Integrated MetaMask Web3 login and Supabase/GUN.js for decentralized storage serving 100+ concurrent users.",
+    category: "Data Analytics & Visualization",
+    items: [
+      {
+        id: "forage-accenture-na-data",
+        issuer: "Accenture North America",
+        title: "Data Analytics and Visualization Job Simulation",
+        date: "Jan 2024",
+        href: "https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/Accenture%20North%20America/hzmoNKtzvAzXsEqx8_Accenture%20North%20America_E4LaihxeGMxhwYpoA_1705945997963_completion_certificate.pdf",
+      },
+    ],
   },
-  {
-    id: "ai-medical-diagnosis",
-    title: "AI Medical Diagnosis System | 2024-2025",
-    body: "Deployed ML models achieving 87% accuracy for disease prediction on healthcare datasets. Piloted Streamlit dashboard with real-time medical data analysis and 40% increased user engagement.",
-  },
-  {
-    id: "magisk-wsa",
-    title: "Magisk on WSA: Android Root Solution | 2021",
-    body: "Ported Magisk root to Windows Subsystem for Android, enabling full app customization and removing Amazon Appstore restrictions, supporting sideloaded APKs across all apps.",
-  },
-] as const;
+];
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -400,25 +466,36 @@ export default function PortfolioShell() {
             </div>
           </div>
 
-          {/* ── Accolades ── */}
+          {/* ── Certifications ── */}
           <div id="Section4" className="Section rp-section">
-            <h2>Accolades</h2>
+            <h2>Accolades/Certifications</h2>
             <div className="rp-accolade-list">
-              {ACCOLADE_ITEMS.map((item, i) => (
-                <article
-                  key={item.id}
-                  className="rp-accolade rp-animate"
-                  style={{ animationDelay: `${i * 30}ms` }}
+              {CERT_GROUPS.map((group) => (
+                <section
+                  key={group.category}
+                  className="rp-cert-group"
                 >
-                  <p className="rp-accolade-title">
-                    {typeof item.title === "string" ? (
-                      <span className="rp-inline-em">{item.title}</span>
-                    ) : (
-                      item.title
-                    )}
-                  </p>
-                  <p className="rp-accolade-body">{item.body}</p>
-                </article>
+                  <h3 className="rp-cert-group-title">{group.category}</h3>
+                  {group.items.map((cert, i) => (
+                    <a
+                      key={cert.id}
+                      href={cert.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rp-accolade rp-cert rp-animate"
+                      style={{ animationDelay: `${i * 30}ms` }}
+                    >
+                      <p className="rp-accolade-title">
+                        <span className="rp-inline-em">{cert.issuer}</span>
+                        {" — "}
+                        {cert.title}
+                      </p>
+                      <p className="rp-accolade-body">
+                        {cert.date} · View certificate →
+                      </p>
+                    </a>
+                  ))}
+                </section>
               ))}
             </div>
           </div>
